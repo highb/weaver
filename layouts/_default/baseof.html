@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}"{{ with .Site.Params.defaultTheme }} data-theme="{{ . }}"{{ end }}>
+<head>
+  {{- partial "head.html" . -}}
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  <header role="banner">
+    <h1><a href="{{ .Site.BaseURL }}">{{ .Site.Title }}</a></h1>
+
+    {{ if .Site.Menus.main }}
+    <nav role="navigation" aria-label="Main navigation">
+      <ul>
+        {{- range .Site.Menus.main }}
+        <li><a href="{{ .URL }}"{{ if $.IsMenuCurrent "main" . }} aria-current="page"{{ end }}>{{ .Name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+    {{ end }}
+  </header>
+
+  <main id="main-content" role="main">
+    {{- block "main" . }}{{ end -}}
+  </main>
+
+  <footer role="contentinfo">
+    {{- partial "hcard.html" . -}}
+    {{- partial "theme-picker.html" . -}}
+    <p>&copy; {{ now.Year }} {{ with .Site.Params.author.name }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}</p>
+  </footer>
+
+  {{ if .Site.Params.defaultTheme }}
+  <script src="{{ "js/theme-switcher.js" | relURL }}"></script>
+  {{ end }}
+</body>
+</html>

@@ -1,0 +1,27 @@
+{{ define "main" }}
+{{ with .Content }}
+<div>{{ . }}</div>
+{{ end }}
+
+{{ $pages := where .Site.RegularPages "Section" "posts" }}
+{{ if $pages }}
+<section>
+  <h2>Recent Posts</h2>
+  <div class="h-feed">
+    <ul>
+      {{- range first 10 $pages }}
+      <li class="h-entry">
+        <a class="p-name u-url" href="{{ .Permalink }}">{{ .Title }}</a>
+        {{ with .Date }}
+        — <time class="dt-published" datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "January 2, 2006" }}</time>
+        {{ end }}
+        {{ with .Params.summary }}
+        <p class="p-summary">{{ . }}</p>
+        {{ end }}
+      </li>
+      {{- end }}
+    </ul>
+  </div>
+</section>
+{{ end }}
+{{ end }}

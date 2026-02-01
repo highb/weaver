@@ -1,0 +1,11 @@
+name = "Weaver"
+license = "MIT"
+licenselink = "https://github.com/highb/weaver/blob/main/LICENSE"
+description = "A brutally simple Hugo theme with no CSS by default. Progressive enhancement through switchable themes. IndieWeb-ready with microformats2."
+homepage = "https://github.com/highb/weaver"
+min_version = "0.80.0"
+tags = ["minimal", "indieweb", "microformats", "accessible", "semantic", "brutalist", "themes"]
+
+[author]
+  name = "Brandon High"
+  homepage = "https://github.com/highb"

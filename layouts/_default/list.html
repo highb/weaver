@@ -1,0 +1,27 @@
+{{ define "main" }}
+<div class="h-feed">
+  <h2 class="p-name">{{ .Title }}</h2>
+
+  {{ with .Content }}
+  <div>{{ . }}</div>
+  {{ end }}
+
+  {{ if .Pages }}
+  <ul>
+    {{- range .Pages }}
+    <li class="h-entry">
+      <a class="p-name u-url" href="{{ .Permalink }}">{{ .Title }}</a>
+      {{ with .Date }}
+      — <time class="dt-published" datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "January 2, 2006" }}</time>
+      {{ end }}
+      {{ with .Params.summary }}
+      <p class="p-summary">{{ . }}</p>
+      {{ end }}
+    </li>
+    {{- end }}
+  </ul>
+  {{ end }}
+
+  {{ template "_internal/pagination.html" . }}
+</div>
+{{ end }}

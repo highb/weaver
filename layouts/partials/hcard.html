@@ -1,0 +1,32 @@
+{{ with .Site.Params.author }}
+<aside role="complementary" aria-label="About the author">
+  <div class="h-card">
+    {{ with .avatar }}
+    <img class="u-photo" src="{{ . }}" alt="Photo of {{ $.Site.Params.author.name }}">
+    {{ end }}
+    <a class="p-name u-url" rel="me" href="{{ .url | default $.Site.BaseURL }}">{{ .name }}</a>
+    {{ with .nickname }}
+    (<span class="p-nickname">{{ . }}</span>)
+    {{ end }}
+    {{ with .pronouns }}
+    <span class="p-pronouns">{{ . }}</span>
+    {{ end }}
+    {{ with .location }}
+    — <span class="p-locality">{{ . }}</span>
+    {{ end }}
+    {{ with .bio }}
+    <p class="p-note">{{ . }}</p>
+    {{ end }}
+
+    {{ with $.Site.Params.social }}
+    <nav aria-label="Social links">
+      <ul>
+        {{- range . }}
+        <li><a rel="me" href="{{ .url }}" class="u-url">{{ .name }}</a></li>
+        {{- end }}
+      </ul>
+    </nav>
+    {{ end }}
+  </div>
+</aside>
+{{ end }}

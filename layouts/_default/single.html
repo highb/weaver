@@ -1,0 +1,29 @@
+{{ define "main" }}
+<article class="h-entry">
+  <header>
+    <h2 class="p-name">{{ .Title }}</h2>
+    {{ with .Date }}
+    <time class="dt-published" datetime="{{ .Format "2006-01-02T15:04:05Z07:00" }}">{{ .Format "January 2, 2006" }}</time>
+    {{ end }}
+    {{ with .Params.summary }}
+    <p class="p-summary">{{ . }}</p>
+    {{ end }}
+  </header>
+
+  <div class="e-content">
+    {{ .Content }}
+  </div>
+
+  {{ with .Params.tags }}
+  <footer>
+    <ul aria-label="Tags">
+      {{- range . }}
+      <li><a class="p-category" href="{{ "tags/" | absURL }}{{ . | urlize }}/">{{ . }}</a></li>
+      {{- end }}
+    </ul>
+  </footer>
+  {{ end }}
+
+  <a class="u-url" href="{{ .Permalink }}" hidden></a>
+</article>
+{{ end }}

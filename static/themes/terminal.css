@@ -1,0 +1,122 @@
+/* Terminal - Monospace, green-on-black, hacker aesthetic */
+
+:root {
+  --color-bg: #0a0a0a;
+  --color-text: #0f0;
+  --color-link: #0ff;
+  --color-link-visited: #0aa;
+  --color-border: #0f0;
+  --color-focus: #ff0;
+  --color-dim: #070;
+  --font-body: "Courier New", Courier, monospace;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --color-bg: #f0f0e8;
+    --color-text: #1a1a1a;
+    --color-link: #006060;
+    --color-link-visited: #404040;
+    --color-border: #1a1a1a;
+    --color-focus: #006060;
+    --color-dim: #666;
+    --font-body: "Courier New", Courier, monospace;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  max-width: 80ch;
+  margin: 0 auto;
+  padding: 1rem;
+  line-height: 1.4;
+}
+
+a {
+  color: var(--color-link);
+}
+
+a:visited {
+  color: var(--color-link-visited);
+}
+
+a:focus,
+select:focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip-link:focus {
+  position: static;
+  left: auto;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li + li::before {
+  content: " | ";
+  color: var(--color-dim);
+}
+
+header h1::before {
+  content: "> ";
+  color: var(--color-dim);
+}
+
+h2::before {
+  content: "## ";
+  color: var(--color-dim);
+}
+
+pre, code {
+  background: transparent;
+  border: 1px solid var(--color-border);
+  padding: 0.2em 0.4em;
+}
+
+pre code {
+  border: none;
+  padding: 0;
+}
+
+hr {
+  border: none;
+  border-top: 1px dashed var(--color-border);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+select {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}

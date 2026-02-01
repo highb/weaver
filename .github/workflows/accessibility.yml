@@ -1,0 +1,87 @@
+name: Accessibility
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  a11y:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: "latest"
+
+      - name: Create example site
+        run: |
+          mkdir -p site/content/posts site/themes
+          ln -s "$GITHUB_WORKSPACE" site/themes/weaver
+
+          cat > site/hugo.toml << 'EOF'
+          baseURL = "http://localhost:1313/"
+          title = "Test Site"
+          theme = "weaver"
+
+          [params]
+            defaultTheme = "brutalist"
+
+            [params.author]
+              name = "Test Author"
+              url = "http://localhost:1313/"
+              bio = "A test author for accessibility checks."
+          EOF
+
+          cat > site/content/_index.md << 'EOF'
+          ---
+          title: "Home"
+          ---
+          Welcome to the test site.
+          EOF
+
+          cat > site/content/posts/test-post.md << 'EOF'
+          ---
+          title: "Test Post"
+          date: 2024-01-01
+          summary: "A test post for accessibility."
+          tags: ["test"]
+          ---
+          This is a test post with a [link](https://example.com).
+          EOF
+
+      - name: Build site
+        run: hugo --source site --minify
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install pa11y-ci
+        run: npm install -g pa11y-ci
+
+      - name: Serve site and run pa11y-ci
+        run: |
+          npx serve site/public -l 8080 &
+          sleep 2
+
+          cat > .pa11yci.json << 'EOF'
+          {
+            "defaults": {
+              "standard": "WCAG2AA",
+              "runners": ["htmlcs"],
+              "timeout": 10000
+            },
+            "urls": [
+              "http://localhost:8080/",
+              "http://localhost:8080/posts/",
+              "http://localhost:8080/posts/test-post/"
+            ]
+          }
+          EOF
+
+          pa11y-ci --config .pa11yci.json

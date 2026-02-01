@@ -1,0 +1,48 @@
+baseURL = "https://example.com/"
+languageCode = "en-us"
+title = "My Site"
+theme = "weaver"
+
+[params]
+  # Default theme CSS file (without .css extension). Leave empty for no styling.
+  defaultTheme = "brutalist"
+
+  # IndieWeb h-card author information
+  [params.author]
+    name = "Jane Doe"
+    nickname = "jdoe"
+    pronouns = "she/her"
+    avatar = "/images/avatar.jpg"
+    location = "Portland, OR"
+    bio = "Web enthusiast and writer."
+    url = "https://example.com/"
+
+  # Social links with rel="me" for IndieWeb identity verification
+  [[params.social]]
+    name = "GitHub"
+    url = "https://github.com/jdoe"
+
+  [[params.social]]
+    name = "Mastodon"
+    url = "https://mastodon.social/@jdoe"
+
+  # WebMention endpoints (optional)
+  [params.webmention]
+    endpoint = "https://webmention.io/example.com/webmention"
+    pingback = "https://webmention.io/example.com/xmlrpc"
+
+[menu]
+  [[menu.main]]
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    name = "Posts"
+    url = "/posts/"
+    weight = 2
+
+  [[menu.main]]
+    name = "About"
+    url = "/about/"
+    weight = 3

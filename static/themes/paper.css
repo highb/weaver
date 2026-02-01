@@ -1,0 +1,131 @@
+/* Paper - Print-inspired, serif fonts, warm tones */
+
+:root {
+  --color-bg: #faf8f5;
+  --color-text: #333;
+  --color-link: #8b0000;
+  --color-link-visited: #5c3a1e;
+  --color-border: #ccc;
+  --color-focus: #8b0000;
+  --color-muted: #777;
+  --font-body: Georgia, "Times New Roman", Times, serif;
+  --font-heading: Georgia, "Times New Roman", Times, serif;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #1e1c19;
+    --color-text: #d5cfc5;
+    --color-link: #d4a07a;
+    --color-link-visited: #9a8070;
+    --color-border: #444;
+    --color-focus: #d4a07a;
+    --color-muted: #888;
+  }
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  max-width: 65ch;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  line-height: 1.7;
+  font-size: 1.1rem;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-heading);
+  font-weight: normal;
+  font-style: italic;
+}
+
+a {
+  color: var(--color-link);
+  text-decoration-style: dotted;
+}
+
+a:visited {
+  color: var(--color-link-visited);
+}
+
+a:hover {
+  text-decoration-style: solid;
+}
+
+a:focus,
+select:focus {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+}
+
+.skip-link:focus {
+  position: static;
+  left: auto;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  display: inline;
+}
+
+nav ul li + li::before {
+  content: " \2022  ";
+  color: var(--color-muted);
+}
+
+time {
+  color: var(--color-muted);
+  font-style: italic;
+}
+
+blockquote {
+  border-left: 3px solid var(--color-border);
+  margin-left: 0;
+  padding-left: 1.5rem;
+  font-style: italic;
+}
+
+hr {
+  border: none;
+  text-align: center;
+  margin: 2rem 0;
+}
+
+hr::after {
+  content: "\2042";
+  color: var(--color-muted);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+select {
+  font-family: var(--font-body);
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
