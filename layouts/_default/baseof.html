@@ -30,8 +30,6 @@
     <p>&copy; {{ now.Year }} {{ with .Site.Params.author.name }}{{ . }}{{ else }}{{ .Site.Title }}{{ end }}</p>
   </footer>
 
-  {{ if .Site.Params.defaultTheme }}
   <script src="{{ "js/theme-switcher.js" | relURL }}"></script>
-  {{ end }}
 </body>
 </html>

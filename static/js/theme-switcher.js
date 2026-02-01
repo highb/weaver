@@ -5,12 +5,25 @@
   var link = document.getElementById("weaver-theme");
   var select = document.getElementById("theme-select");
 
+  // Derive the base path to the themes directory from the existing link href,
+  // or fall back to a path relative to the document.
+  var basePath = (function () {
+    var href = link.getAttribute("href");
+    if (href) {
+      return href.replace(/[^/]*\.css$/, "");
+    }
+    // No href set — build from <base> or location
+    var base = document.querySelector("base");
+    var root = base ? base.href : window.location.origin + "/";
+    return root + "themes/";
+  })();
+
   function applyTheme(theme) {
     if (theme) {
-      link.href = "/themes/" + theme + ".css";
+      link.setAttribute("href", basePath + theme + ".css");
       document.documentElement.setAttribute("data-theme", theme);
     } else {
-      link.href = "";
+      link.removeAttribute("href");
       document.documentElement.removeAttribute("data-theme");
     }
   }
