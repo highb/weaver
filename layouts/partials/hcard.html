@@ -2,7 +2,7 @@
 <aside role="complementary" aria-label="About the author">
   <div class="h-card">
     {{ with .avatar }}
-    <img class="u-photo" src="{{ . }}" alt="Photo of {{ $.Site.Params.author.name }}">
+    <img class="u-photo" src="{{$.Site.BaseURL}}/{{ . }}" alt="Photo of {{ $.Site.Params.author.name }}">
     {{ end }}
     <a class="p-name u-url" rel="me" href="{{ .url | default $.Site.BaseURL }}">{{ .name }}</a>
     {{ with .nickname }}
